@@ -273,9 +273,9 @@ html, body {
 .dtbl td { padding: 5px 7px; border: 1px solid var(--bdr); vertical-align: top; }
 
 .badge { display: inline-block; padding: 1px 7px; border-radius: 9px; font-size: 10px; font-weight: 600; white-space: nowrap; }
-.b-done   { background: #dcfce7; color: #166534; }
-.b-active { background: #dbeafe; color: #1e40af; }
-.b-pause  { background: #fef9c3; color: #854d0e; }
+.b-done   { background: #dcfce7; color: #f77f08; }
+.b-active { background: #dbeafe; color: #44cff2; }
+.b-pause  { background: #fef9c3; color: #da07ff; }
 .b-warn   { background: #fee2e2; color: #991b1b; }
 .b-real   { background: #ede9fe; color: #5b21b6; }
 

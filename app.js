@@ -216,10 +216,10 @@ const chart = new Chart(document.getElementById('chart').getContext('2d'), {
     datasets: [
       DS(CHART_LABELS.uk[0], CHART_DATA.rejected,    '#e53e3e'),
       DS(CHART_LABELS.uk[1], CHART_DATA.accepted,    '#3182ce'),
-      DS(CHART_LABELS.uk[2], CHART_DATA.reviewed,    '#d69e2e'),
+      DS(CHART_LABELS.uk[2], CHART_DATA.reviewed,    '#bf00ff'),
       DS(CHART_LABELS.uk[3], CHART_DATA.received,    '#63b3ed'),
       DS(CHART_LABELS.uk[4], CHART_DATA.implemented, '#805ad5'),
-      DS(CHART_LABELS.uk[5], CHART_DATA.approved,    '#38a169'),
+      DS(CHART_LABELS.uk[5], CHART_DATA.approved,    '#ff9102'),
     ]
   },
   options: {
@@ -234,7 +234,7 @@ const chart = new Chart(document.getElementById('chart').getContext('2d'), {
   }
 });
 
-const MARKER_COLOR = { 'Отримано': '#3182ce', 'Схвалено': '#38a169', 'Відхилено': '#e53e3e', 'Реалізовано': '#805ad5', 'Прийнято': '#3182ce' };
+const MARKER_COLOR = { 'Отримано': '#3182ce', 'Схвалено': '#ffa406', 'Відхилено': '#e53e3e', 'Реалізовано': '#805ad5', 'Прийнято': '#3182ce' };
 let projectMarkers = [];
 
 function refreshMapMarkers() {
@@ -658,8 +658,8 @@ function renderMembers() {
 
 
   const LAYOUT = [
+    { type: 'pair', codes: ['ua', 'fi'] }, 
     { type: 'repr', idx: 0 },                       
-    { type: 'pair', codes: ['ua', 'fi'] },          
     { type: 'pair', codes: ['lt', 'be'] },           
     { type: 'pair', codes: ['se', 'ie'] },           
     { type: 'pair', codes: ['cz', 'sk'] },           
