@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Коаліція Укриттів</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+  <div class="login-overlay" id="login-overlay">
+    <button class="login-lang-btn" id="login-lang-btn">Ukr/En</button>
+    <div class="login-page-header">
+      <img src="assets/coalition-logo.png" alt="logo" class="login-logo" />
+      <div class="login-page-title" id="login-page-title">Коаліція Укриттів</div>
+    </div>
+    <div class="login-box">
+      <div class="login-box-title" id="login-box-title">Вхід до системи</div>
+      <form class="login-form" id="login-form" autocomplete="off">
+        <div class="login-field">
+          <label class="login-lbl" id="login-lbl-user" for="login-user">Логін</label>
+          <input class="login-inp" id="login-user" type="text" placeholder="Введіть логін" />
+        </div>
+        <div class="login-field">
+          <label class="login-lbl" id="login-lbl-pass" for="login-pass">Пароль</label>
+          <input class="login-inp" id="login-pass" type="password" placeholder="Введіть пароль" />
+        </div>
+        <div class="login-error" id="login-error">Невірний логін або пароль</div>
+        <button class="login-btn" id="login-submit" type="submit">Увійти</button>
+      </form>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-logo-wrap">
+      <img src="assets/logo.png" alt="" class="nav-logo" />
+    </div>
+    <div class="nav-links">
+      <img src="assets/coalition-logo.png" alt="logo" class="nav-coalition-logo" />
+      <span class="nav-brand" data-i18n="brand">Коаліція Укриттів</span>
+      <div class="nav-dd-wrap" id="memo-wrap">
+        <button class="nav-a nav-dd-btn" id="memo-btn" data-i18n="nav_memo">Меморандум ▾</button>
+        <div class="nav-dropdown" id="memo-menu">
+          <a class="dd-item" data-i18n="dd_memo_ua" href="https://drive.google.com/file/d/1GZ7KrPpKE3iO23RKFLFzWGKSoyuU9lJf/view" target="_blank">Меморандум (УКР)</a>
+          <a class="dd-item" data-i18n="dd_memo_en" href="https://drive.google.com/file/d/1lxTYbls1hzi21ISS2jTwnEZrO1BnnqYs/view" target="_blank">Memorandum (ENG)</a>
+        </div>
+      </div>
+      <div class="nav-dd-wrap" id="docs-wrap">
+        <button class="nav-a nav-dd-btn" id="docs-btn" data-i18n="nav_docs">Документи ▾</button>
+        <div class="nav-dropdown" id="docs-menu">
+          <div class="dd-sub-wrap">
+            <a class="dd-item dd-has-sub" href="#"><span data-i18n="dd_gen">Загальна інформація</span> <span class="dd-arrow">&#9658;</span></a>
+            <div class="dd-submenu">
+              <a class="dd-item" data-i18n="dd_gen_ua" href="https://drive.google.com/file/d/1c7UuBJDThiIXSymz87JOwFYAd0b_RwkX/view" target="_blank">Загальна інформація (УКР)</a>
+              <a class="dd-item" data-i18n="dd_gen_en" href="https://drive.google.com/file/d/1In93WHbCAjwTc6LzAWRWIRoE-KoOLcZE/view" target="_blank">General information (ENG)</a>
+            </div>
+          </div>
+          <div class="dd-sub-wrap">
+            <a class="dd-item dd-has-sub" href="#"><span data-i18n="dd_algo">Алгоритми опрацювання проєктів</span> <span class="dd-arrow">&#9658;</span></a>
+            <div class="dd-submenu">
+              <a class="dd-item" data-i18n="dd_algo_ua" href="#">Алгоритми (УКР)</a>
+              <a class="dd-item" data-i18n="dd_algo_en" href="#">Algorithms (ENG)</a>
+            </div>
+          </div>
+          <a class="dd-item dd-muted" data-i18n="dd_protocols" href="#">протоколи</a>
+          <div class="dd-sub-wrap">
+            <a class="dd-item dd-has-sub" href="#"><span data-i18n="dd_gb">Керівна рада</span> <span class="dd-arrow">&#9658;</span></a>
+            <div class="dd-submenu">
+              <a class="dd-item" data-i18n="dd_gb1" href="https://drive.google.com/drive/folders/1r5Ce28jkWRQXYef7ttpGTj1_P5NGv3p7?usp=drive_link" target="_blank">Протокол 1</a>
+            </div>
+          </div>
+          <div class="dd-sub-wrap">
+            <a class="dd-item dd-has-sub" href="#"><span data-i18n="dd_sg">Наглядова група</span> <span class="dd-arrow">&#9658;</span></a>
+            <div class="dd-submenu">
+              <a class="dd-item" data-i18n="dd_sg1" href="https://drive.google.com/drive/folders/1-4dDL2wNvWg3c_IubGRWY-3zfWi4PMCk?usp=drive_link" target="_blank">Протокол 1</a>
+              <a class="dd-item" data-i18n="dd_sg2" href="https://drive.google.com/drive/folders/1TzNSOF8jRhHJ-A6eSc9jAuBCr-xx1EYj?usp=drive_link" target="_blank">Протокол 2</a>
+            </div>
+          </div>
+          <div class="dd-sub-wrap">
+            <a class="dd-item dd-has-sub" href="#"><span data-i18n="dd_psg">Група з відбору проєктів</span> <span class="dd-arrow">&#9658;</span></a>
+            <div class="dd-submenu">
+              <a class="dd-item" data-i18n="dd_psg1" href="https://drive.google.com/drive/folders/1_cu6G1fTOdLmLszssFyV2wvTqfm38Yvl?usp=drive_link" target="_blank">Протокол 1</a>
+              <a class="dd-item" data-i18n="dd_psg2" href="https://drive.google.com/drive/folders/1fPMbf_S1zUxwnC1GSM1kxdS0UFgukx42?usp=drive_link" target="_blank">Протокол 2</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" id="lang-toggle">Ukr/En</button>
+      <button class="logout-btn" id="logout-btn" title="Вийти">&#x2192;</button>
+    </div>
+  </nav>
+  <div class="grid">
+    <div class="col col-l">
+      <div id="map"></div>
+      <div class="mfoot">
+        <div class="mfoot-top">
+          <span class="mfoot-ttl" data-i18n="map_settings">Налаштування карти:</span>
+          <span class="mfoot-cnt"><span data-i18n="map_on">На карті:</span> <b id="obj-total">1000</b> <span data-i18n="map_obj">об.</span></span>
+        </div>
+        <div class="mfilters">
+          <div class="mfcol">
+            <div class="mfcol-hdr" data-i18n="work_type">Вид робіт:</div>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="work" data-val="Нове будівництво" /> <span data-i18n="work_new">Нове будівництво</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="work" data-val="Капітальний ремонт" /> <span data-i18n="work_cap">Капітальний ремонт</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="work" data-val="Реконструкція" /> <span data-i18n="work_rec">Реконструкція</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="work" data-val="Реставрація" /> <span data-i18n="work_res">Реставрація</span></label>
+          </div>
+          <div class="mfcol">
+            <div class="mfcol-hdr" data-i18n="sphere_hdr">Сфери суспільного життя:</div>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="sphere" data-val="Освіта" /> <span data-i18n="sphere_edu">Освіта</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="sphere" data-val="Охорона здоров'я" /> <span data-i18n="sphere_med">Охорона здоров'я</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="sphere" data-val="Публічного доступу" /> <span data-i18n="sphere_pub">Публічного доступу</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="sphere" data-val="Інші" /> <span data-i18n="other">Інші</span></label>
+          </div>
+          <div class="mfcol">
+            <div class="mfcol-hdr" data-i18n="obj_type">Вид об'єктів:</div>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="obj" data-val="Сховище" /> <span data-i18n="obj_shelter">Сховища</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="obj" data-val="Протирадіаційне укриття" /> <span data-i18n="obj_rad">Протирадіаційні укриття</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="obj" data-val="dual_shelter" /> <span data-i18n="obj_dual1">Споруди подвійного призначення із захисними властивостями сховищ</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="obj" data-val="dual_rad" /> <span data-i18n="obj_dual2">Споруди подвійного призначення із захисними властивостями протирадіаційних укриттів</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="obj" data-val="other_obj" /> <span data-i18n="other">Інші</span></label>
+          </div>
+          <div class="mfcol">
+            <div class="mfcol-hdr" data-i18n="status_hdr">Статус:</div>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="status" data-val="Отримано" /> <span data-i18n="status_recv">Отримано</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="status" data-val="Схвалено" /> <span data-i18n="status_appr">Схвалені</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="status" data-val="Відхилено" /> <span data-i18n="status_rej">Відхилені</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="status" data-val="Прийнято" /> <span data-i18n="status_acc">Прийняті</span></label>
+            <label class="mfl"><input type="checkbox" role="switch" data-group="status" data-val="Реалізовано" /> <span data-i18n="status_real">Реалізовані</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-m">
+      <div class="card mb8">
+        <div class="row-sb mb6">
+          <h2 class="ptitle" data-i18n="chart_title">Інформація про проєкти Коаліції</h2>
+        </div>
+        <div class="chart-legend-row mb4">
+          <span class="cl-item"><span class="cl-dot" style="background:#e53e3e"></span><span data-i18n="leg_rej">Відхилено</span></span>
+          <span class="cl-item"><span class="cl-dot" style="background:#3182ce"></span><span data-i18n="leg_acc">Прийнято на розгляд</span></span>
+          <span class="cl-item"><span class="cl-dot" style="background:#d69e2e"></span><span data-i18n="leg_rev">Розглянуто</span></span>
+          <span class="cl-item"><span class="cl-dot" style="background:#63b3ed"></span><span data-i18n="leg_recv">Отримано</span></span>
+          <span class="cl-item"><span class="cl-dot" style="background:#805ad5"></span><span data-i18n="leg_real">Реалізовано</span></span>
+          <span class="cl-item"><span class="cl-dot" style="background:#38a169"></span><span data-i18n="leg_appr">Схвалено</span></span>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="chart"></canvas>
+        </div>
+      </div>
+      <div class="card mb8">
+        <div class="card-ttl mb8" data-i18n="approved">Схвалено:</div>
+        <table class="rg-tbl" id="regions-grid"><tbody></tbody></table>
+      </div>
+      <div class="card grow">
+        <div class="row-sb mb8">
+          <span class="card-ttl" data-i18n="proc_title">Стан опрацювання проєктів Коаліцією:</span>
+          <div class="search-wrap">
+            <input class="search-inp" type="text" id="edr-search" data-i18n-placeholder="search_ph" placeholder="Пошук Коду ЄДЕССБ" />
+            <span class="search-icon">&#128269;</span>
+          </div>
+        </div>
+        <div class="dtbl-wrap">
+          <table class="dtbl" id="proj-tbl">
+            <thead>
+              <tr>
+                <th data-i18n="th_date">Дата подання</th>
+                <th data-i18n="th_status">Статус розгляду</th>
+                <th data-i18n="th_dream">Код DREAM</th>
+                <th data-i18n="th_corresp">Назва кореспондента</th>
+                <th data-i18n="th_name">Назва юридичної особи</th>
+                <th data-i18n="th_edr">Код ЄДЕССБ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01.01.2024</td>
+                <td data-i18n="st_rej">Відхилено</td>
+                <td class="mono">DREAM-UA-<br>000000x0000000</td>
+                <td class="small-txt" data-i18n="company">Комунальне некомерційне підприємство Тольської міської ради Київської міської ради</td>
+                <td class="mono">PD01.0000-0000-0000-0000</td>
+              </tr>
+              <tr>
+                <td>01.01.2024</td>
+                <td data-i18n="st_recv">Отримано</td>
+                <td class="mono">DREAM-UA-<br>000000x0000000</td>
+                <td class="small-txt" data-i18n="company">Комунальне некомерційне підприємство Тольської міської ради Київської міської ради</td>
+                <td class="mono">PD01.0000-0000-0000-0000</td>
+              </tr>
+              <tr>
+                <td>01.01.2024</td>
+                <td data-i18n="st_appr">Схвалено</td>
+                <td class="mono">DREAM-UA-<br>000000x0000000</td>
+                <td class="small-txt" data-i18n="company">Комунальне некомерційне підприємство Тольської міської ради Київської міської ради</td>
+                <td class="mono">PD01.0000-0000-0000-0000</td>
+              </tr>
+              <tr>
+                <td>01.01.2024</td>
+                <td data-i18n="st_appr">Схвалено</td>
+                <td class="mono">DREAM-UA-<br>000000x0000000</td>
+                <td class="small-txt" data-i18n="company">Комунальне некомерційне підприємство Тольської міської ради Київської міської ради</td>
+                <td class="mono">PD01.0000-0000-0000-0000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+    <div class="col col-r">
+      <div class="card mb8">
+        <div class="row-sb mb8">
+          <span class="card-ttl" data-i18n="members_title">Члени Коаліції:</span>
+          <span class="grey"><span data-i18n="total">Всього:</span> <b id="mem-cnt">13</b></span>
+        </div>
+        <div class="flags" id="flags-row"><span class="ph">—</span></div>
+      </div>
+      <div class="card mb8">
+        <div class="brow mb8">
+          <div class="bstat">
+            <div class="bnum" id="b1">31,200</div>
+            <div class="blbl" id="bl1" data-i18n="stat1">млн євро передбачено</div>
+          </div>
+          <div class="bstat">
+            <div class="bnum" id="b2">31,200</div>
+            <div class="blbl" id="bl2" data-i18n="stat2">млн євро виділено</div>
+          </div>
+          <div class="bstat">
+            <div class="bnum" id="b3">31,200</div>
+            <div class="blbl" id="bl3" data-i18n="stat3">тис. осіб захищено</div>
+          </div>
+        </div>
+        <div class="mrow">
+          <div class="mstat">
+            <div class="mnum" id="m1">22</div>
+            <div class="mlbl" id="ml1" data-i18n="stat4">проєктів реалізовано</div>
+          </div>
+          <div class="mstat">
+            <div class="mnum" id="m2">22</div>
+            <div class="mlbl" id="ml2" data-i18n="stat5">профінансовано проєктів</div>
+          </div>
+        </div>
+      </div>
+      <div class="card grow">
+        <div class="card-ttl mb8" data-i18n="news_title">Основні події Коаліції</div>
+        <div class="news" id="news">
+          </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="app.js?v=2"></script>
+</body>
+</html>
